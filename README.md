@@ -49,29 +49,31 @@ This project uses PDM (Python Development Master), a modern Python package manag
    - Connect your account and start a tunnel to redirect to your local server:
 
      ```bash
-     ngrok http http://127.0.0.1:5000
+     pdm run ngrok
      ```
 
    - This will provide a URL that you will use as your `MEETUP_COM_REDIRECT_URI`. Every time you run the URL is slightly different, remember to update it in your Meetup API Settings.
 
 ## Usage
 
-To run the project, you will need to start both the main script and the web server.
+You can utilize PDM scripts to easily run components of the project:
 
-### Main Script
-
-Execute the `main.py` script to start the data processing:
+### Start the Flask web server
 
 ```bash
-pdm run python main.py
+pdm run flask
 ```
 
-### Web Server
-
-Start the Flask web server to handle OAuth redirects:
+### Start the ngrok tunnel
 
 ```bash
-pdm run python web_server.py
+pdm run ngrok
+```
+
+### Execute the main script
+
+```bash
+pdm run export
 ```
 
 ### Configuration

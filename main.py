@@ -13,7 +13,7 @@ def main() -> None:
     print(env)
 
     authorize(env)
-    query = Path("query.graphql").read_text()
+    query = Path("djangolondon/query.graphql").read_text()
 
     # Making the GraphQL query call
     result = graphql_query(query)

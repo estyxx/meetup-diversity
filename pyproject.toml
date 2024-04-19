@@ -37,6 +37,9 @@ linters = ["ruff>=0.2.1", "pre-commit>=3.6.1", "mypy>=1.8.0"]
 
 [tool.pdm.scripts]
 _.env_file = ".env"
+ngrok = "ngrok http http://127.0.0.1:5000"
+flask = "flask run -p 5000"
+export = { call = "main:main" }
 
 [tool.pdm]
 distribution = false

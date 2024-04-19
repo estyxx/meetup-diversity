@@ -55,7 +55,7 @@ def extract_gender(env: Env, name: str) -> str:
                     "role": "user",
                     "content": (
                         "Based on traditional associations and not implying identity, "
-                        "would the name '{name}' be more commonly associated with a "
+                        f"would the name '{name}' be more commonly associated with a "
                         "male or female? "
                         "Give a short answer, 'female' or 'male' or 'other'"
                     ),
