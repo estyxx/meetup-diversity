@@ -1,15 +1,17 @@
 import json
-import pandas as pd
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+import pandas as pd
 
 
-def save_to_excel(data, filename="events_data"):
+def save_to_excel(data: list[dict[str, Any]], filename: str = "events_data") -> None:
     """Saves the data to an Excel file in the output directory with a timestamp."""
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     output_dir = Path("outputs")
-    output_dir.mkdir(parents=True, exist_ok=True)  # Ensure the directory exists
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     full_path = output_dir / f"{filename}_{now}.xlsx"
     df = pd.DataFrame(data)
@@ -18,12 +20,12 @@ def save_to_excel(data, filename="events_data"):
     print(f"Data successfully saved to {full_path}.")
 
 
-def save_to_json(data, filename="events_data"):
+def save_to_json(data: list[dict[str, Any]], filename: str = "events_data") -> None:
     """Saves the data to a JSON file in the output directory with a timestamp."""
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     output_dir = Path("outputs")
-    output_dir.mkdir(parents=True, exist_ok=True)  # Ensure the directory exists
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     full_path = output_dir / f"{filename}_{now}.json"
     with full_path.open("w") as f:

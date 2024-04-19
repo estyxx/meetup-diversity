@@ -1,13 +1,15 @@
 import json
-from pathlib import Path
+import webbrowser
+from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Mapping, Optional
+from pathlib import Path
+from typing import Any
+
 import requests
+
 from djangolondon.env import Env
 
-
 token_file_path = Path("tokens.json")
-import webbrowser
 
 
 @dataclass
@@ -19,7 +21,7 @@ class Tokens:
         return {"access_token": self.access_token, "refresh_token": self.refresh_token}
 
 
-def save_tokens(access_token: str, refresh_token: Optional[str]):
+def save_tokens(access_token: str, refresh_token: str | None) -> None:
     """Save the access and refresh tokens to a JSON file."""
     tokens = {"access_token": access_token, "refresh_token": refresh_token}
     token_file_path.parent.mkdir(parents=True, exist_ok=True)
@@ -63,7 +65,7 @@ def is_token_valid(access_token: str) -> bool:
     return response.status_code == 200
 
 
-def request_access_token(env: Env, code: str):
+def request_access_token(env: Env, code: str) -> dict[str, Any]:
     url = "https://secure.meetup.com/oauth2/access"
     data = {
         "client_id": env.MEETUP_COM_KEY,
@@ -74,9 +76,18 @@ def request_access_token(env: Env, code: str):
     }
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
 
-    response = requests.post(url, data=data, headers=headers)
+    try:
+        response = requests.post(url, data=data, headers=headers)
+        response.raise_for_status()
 
-    return response.json()
+        json_response: dict[str, Any] = response.json()
+        return json_response
+    except requests.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+    except Exception as err:
+        print(f"An error occurred: {err}")
+
+    return {}
 
 
 def refresh_access_token(env: Env, refresh_token: str) -> Mapping[str, str]:
@@ -89,14 +100,22 @@ def refresh_access_token(env: Env, refresh_token: str) -> Mapping[str, str]:
         "refresh_token": refresh_token,
     }
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    response = requests.post(url, data=data, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return response.json()  # Handle error better in practice
+
+    try:
+        response = requests.post(url, data=data, headers=headers)
+        response.raise_for_status()
+
+        json_response: dict[str, Any] = response.json()
+        return json_response
+    except requests.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+    except Exception as err:
+        print(f"An error occurred: {err}")
+
+    return {}
 
 
-def authorize(env: Env):
+def authorize(env: Env) -> None:
     try:
         get_tokens(env)
         print("Token is valid, continuing...")
@@ -108,7 +127,7 @@ def authorize(env: Env):
         webbrowser.open(url)
 
 
-def graphql_query(query: str, variables: Optional[dict] = None) -> dict:
+def graphql_query(query: str, variables: dict | None = None) -> dict[str, Any]:
     """
     Perform a GraphQL query using the provided query string and variables.
     Automatically handles token retrieval and refresh.
@@ -127,7 +146,10 @@ def graphql_query(query: str, variables: Optional[dict] = None) -> dict:
         }
         payload = {"query": query, "variables": variables}
         response = requests.post(url, headers=headers, json=payload)
-        return response.json()  # Returns the JSON response from the API
+
+        json_response: dict[str, Any] = response.json()
+        return json_response
+
     except Exception as e:
         print(f"Error occurred while trying to make a GraphQL query: {str(e)}")
         return {"error": str(e)}  # Returns a dictionary with error details

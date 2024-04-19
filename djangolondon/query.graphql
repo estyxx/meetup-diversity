@@ -1,12 +1,7 @@
 query {
   groupByUrlname(urlname: "djangolondon") {
     name
-    pastEvents(
-      input: {
-        first: 500
-      },
-      sortOrder: DESC
-    ) {
+    pastEvents(input: { first: 500 }, sortOrder: DESC) {
       edges {
         cursor
         node {

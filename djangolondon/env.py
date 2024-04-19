@@ -1,5 +1,5 @@
 from dataclasses import dataclass, fields
-
+from typing import Self
 
 from dotenv import dotenv_values
 
@@ -11,7 +11,7 @@ class Env:
     MEETUP_COM_REDIRECT_URI: str
     OPENAI_API_KEY: str
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         sensitive_keywords = ["KEY", "PASSWORD", "SECRET", "TOKEN"]
         return (
             type(self).__name__
@@ -28,5 +28,5 @@ class Env:
         )
 
     @classmethod
-    def get_env(cls):
+    def get_env(cls) -> Self:
         return cls(**dotenv_values(".env"))

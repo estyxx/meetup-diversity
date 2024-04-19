@@ -1,14 +1,14 @@
-from djangolondon.env import Env
-from djangolondon.meetup import authorize
-from djangolondon.meetup import graphql_query
-
 from pathlib import Path
-from djangolondon.data_saver import save_to_excel, save_to_json
-from djangolondon.ai import extract_speakers, extract_gender
+
 import pandas as pd
 
+from djangolondon.ai import extract_gender, extract_speakers
+from djangolondon.data_saver import save_to_excel, save_to_json
+from djangolondon.env import Env
+from djangolondon.meetup import authorize, graphql_query
 
-def main():
+
+def main() -> None:
     env = Env.get_env()
     print(env)
 

@@ -132,7 +132,7 @@ cython_debug/
 *.xlsx
 *.xlsm
 *.xlsb
-*.json  
+*.json
 tokens.json
 secrets.json
 
