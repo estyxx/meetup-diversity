@@ -115,6 +115,7 @@ venv.bak/
 
 # Type checkers and static analyzers
 .mypy_cache/
+.ruff_cache/
 .dmypy.json
 dmypy.json
 .pyre/
