@@ -2,6 +2,12 @@
 
 This project is designed to analyze and visualize diversity data from the Django London Meetup group. It retrieves event details, extracts speaker names, and guesses the gender of speakers to provide insights into diversity trends within the community. Additionally, a Flask web server is utilized to handle OAuth redirections needed for Meetup API authentication.
 
+## Inspiration
+
+This project was inspired by the "Hidden Figures of Python" podcast series, which shines a light on lesser-known contributors in the Python community. Listening to these stories sparked curiosity about the diversity and representation within our community at the Django London Meetup. This project is a tribute to all the speakers who have shared their knowledge and expertise at our meetups.
+
+[Listen to the Hidden Figures of Python](https://open.spotify.com/show/0paWD9BHs7QNNHsMFFUoIN)
+
 ## Features
 
 - Fetch event data via the Meetup API using GraphQL.
