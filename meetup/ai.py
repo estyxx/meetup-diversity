@@ -1,7 +1,7 @@
 import openai
 from openai import OpenAI
 
-from djangolondon.env import Env
+from meetup.env import Env
 
 
 def extract_speakers(env: Env, description: str) -> list[str]:

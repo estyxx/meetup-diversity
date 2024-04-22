@@ -2,10 +2,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from djangolondon.ai import extract_gender, extract_speakers
-from djangolondon.data_saver import save_to_excel, save_to_json
-from djangolondon.env import Env
-from djangolondon.meetup import authorize, graphql_query
+from meetup.ai import extract_gender, extract_speakers
+from meetup.data_saver import save_to_excel, save_to_json
+from meetup.env import Env
+from meetup.meetup import authorize, graphql_query
 
 
 def main() -> None:
@@ -13,7 +13,7 @@ def main() -> None:
     print(env)
 
     authorize(env)
-    query = Path("djangolondon/query.graphql").read_text()
+    query = Path("meetup/query.graphql").read_text()
 
     # Making the GraphQL query call
     result = graphql_query(query)

@@ -1,7 +1,7 @@
 from flask import Flask, request
 
-from djangolondon.env import Env
-from djangolondon.meetup import request_access_token, save_tokens
+from meetup.env import Env
+from meetup.meetup import request_access_token, save_tokens
 
 app = Flask(__name__)
 

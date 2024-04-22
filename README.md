@@ -31,8 +31,8 @@ This project uses PDM (Python Development Master), a modern Python package manag
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/djangolondon-diversity.git
-   cd djangolondon-diversity
+   git clone https://github.com/yourusername/meetup-diversity.git
+   cd meetup-diversity
    ```
 
 2. **Install dependencies:**

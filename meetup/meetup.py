@@ -7,7 +7,7 @@ from typing import Any
 
 import requests
 
-from djangolondon.env import Env
+from meetup.env import Env
 
 token_file_path = Path("tokens.json")
 
